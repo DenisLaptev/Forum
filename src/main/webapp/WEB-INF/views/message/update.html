@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Update Message</title>
+
+</head>
+
+<body>
+<div class="w3-container">
+
+    <p id="messageId" hidden><span th:text="${id}"/></p>
+
+    <div class="w3-container w3-bar w3-blue">
+        <span class="w3-bar-item" style="padding-left:1px"><b>Update Message</b></span>
+    </div>
+    <br>
+
+
+    <table id="update_entity_table" class="w3-table w3-bordered">
+        <tr>
+            <th>Property Name</th>
+            <th>Property Value</th>
+        </tr>
+        <tr>
+            <td>Id</td>
+            <td><label id="message_id" name="message_id_name" ></label></td>
+        </tr>
+        <tr>
+            <td>Text</td>
+            <td><input id="text" name="text_name" type="text"></td>
+        </tr>
+        <tr>
+            <td>User Id</td>
+            <td><input id="user_id" name="user_id_name" type="text"></td>
+        </tr>
+
+    </table>
+    <br>
+    <br>
+
+
+    <div class="container">
+        <button id="btnSave" class="btnSaveAuto">Save</button>
+        <button id="btnGoToRead" type="button">Cancel</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script type="text/javascript">
+
+        $.ajaxSetup({
+            cache: false,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        });
+
+        function MessageDTO(id,text){
+            this.id = id;
+            this.text = text;
+        }
+
+        $(document).delegate('#btnSave','click',function(event){
+            event.preventDefault();
+
+            var messageId = $('#messageId').text();
+
+            var id = messageId;
+            var text = $('#text').val();
+
+            var messageDTO = new MessageDTO(id,text);
+
+            console.log(messageDTO);
+            console.log(JSON.stringify(messageDTO));
+
+            alert("messageDTO.text="+messageDTO.text);
+
+            alert("button Save!");
+
+            $.ajax({
+                type: "PUT",
+                url: '/message',
+                data: JSON.stringify(messageDTO),
+                success: function(result){
+                    location.href="/ui/message/read/" + messageId;
+                    window.setTimeout(function(){
+                        location.reload();
+                    }, 1000);
+
+                    alert('SUCCESS!');
+                },
+                error: function(err){
+                    alert('ERROR!');
+                }
+            });
+        });
+
+
+
+        $(document).delegate('#btnGoToRead','click',function(result){
+
+            var messageId = $('#messageId').text();
+
+            location.href="/ui/message/read/" + messageId;
+            window.setTimeout(function(){
+                location.reload();
+            }, 1000);
+
+            alert('SUCCESS!');
+        });
+
+
+        function ajaxGet(){
+
+            var messageId = $('#messageId').text();
+
+            $.getJSON('/message/' + messageId, function(json){
+
+                console.log(json);
+
+                $('#message_id').text(json.id);
+                $('#text').val(json.text);
+
+            });
+        }
+
+        $(document).ready(function() {
+
+            ajaxGet();
+        });
+
+    </script>
+
+</div>
+
+</body>
+</html>

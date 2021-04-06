@@ -14,22 +14,22 @@ import javax.persistence.*;
 public class Message {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="id_generator")
-    @SequenceGenerator(name="id_generator", sequenceName = "seq_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_generator")
+    @SequenceGenerator(name = "id_generator", sequenceName = "seq_id")
     private Long id;
 
-    @Column(name="text")
+    @Column(name = "text")
     private String text;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name="topic_id")
+    @JoinColumn(name = "topic_id")
     private Topic topic;
 
     @OneToOne
-    @JoinColumn(name="quoted_message_id")
+    @JoinColumn(name = "quoted_message_id")
     private Message quotedMessage;
 }

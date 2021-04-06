@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Update Role</title>
+
+</head>
+
+<body>
+<div class="w3-container">
+
+    <p id="roleId" hidden><span th:text="${id}"/></p>
+
+    <div class="w3-container w3-bar w3-blue">
+        <span class="w3-bar-item" style="padding-left:1px"><b>Update Role</b></span>
+    </div>
+    <br>
+
+
+    <table id="update_entity_table" class="w3-table w3-bordered">
+        <tr>
+            <th>Property Name</th>
+            <th>Property Value</th>
+        </tr>
+        <tr>
+            <td>Id</td>
+            <td><label id="role_id" name="role_id_name" ></label></td>
+        </tr>
+        <tr>
+            <td>Role</td>
+            <td><input id="role_role" name="role_role_name" type="text"></td>
+        </tr>
+
+    </table>
+    <br>
+    <br>
+
+
+    <div class="container">
+        <button id="btnSave" class="btnSaveAuto">Save</button>
+        <button id="btnGoToRead" type="button">Cancel</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script type="text/javascript">
+
+        $.ajaxSetup({
+            cache: false,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        });
+
+        function RoleDTO(id,role){
+            this.id = id;
+            this.role = role;
+        }
+
+        $(document).delegate('#btnSave','click',function(event){
+            event.preventDefault();
+
+            var roleId = $('#roleId').text();
+
+            var id = roleId;
+            var role = $('#role_role').val();
+
+            var roleDTO = RoleDTO(id,role);
+
+            console.log(roleDTO);
+            console.log(JSON.stringify(roleDTO));
+
+            alert("roleDTO.role="+roleDTO.role);
+
+            alert("button Save!");
+
+            $.ajax({
+                type: "PUT",
+                url: '/role',
+                data: JSON.stringify(roleDTO),
+                success: function(result){
+                    location.href="/ui/role/read/" + roleId;
+                    window.setTimeout(function(){
+                        location.reload();
+                    }, 1000);
+
+                    alert('SUCCESS!');
+                },
+                error: function(err){
+                    alert('ERROR!');
+                }
+            });
+        });
+
+
+
+        $(document).delegate('#btnGoToRead','click',function(result){
+
+            var roleId = $('#roleId').text();
+
+            location.href="/ui/role/read/" + roleId;
+            window.setTimeout(function(){
+                location.reload();
+            }, 1000);
+
+            alert('SUCCESS!');
+        });
+
+
+        function ajaxGet(){
+
+            var roleId = $('#roleId').text();
+
+            $.getJSON('/role/' + roleId, function(json){
+
+                console.log(json);
+
+                $('#role_id').text(json.id);
+                $('#role_role').val(json.role);
+
+            });
+        }
+
+        $(document).ready(function() {
+
+            ajaxGet();
+        });
+
+    </script>
+
+</div>
+
+</body>
+</html>

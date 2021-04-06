@@ -14,14 +14,14 @@ import javax.persistence.*;
 public class Avatar {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="id_generator")
-    @SequenceGenerator(name="id_generator", sequenceName = "seq_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_generator")
+    @SequenceGenerator(name = "id_generator", sequenceName = "seq_id")
     private Long id;
 
-    @Column(name="url")
+    @Column(name = "url")
     private String url;
 
     @OneToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 }

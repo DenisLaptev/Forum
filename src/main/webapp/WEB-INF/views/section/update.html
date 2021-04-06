@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Update Section</title>
+
+</head>
+
+<body>
+<div class="w3-container">
+
+    <p id="sectionId" hidden><span th:text="${id}"/></p>
+
+    <div class="w3-container w3-bar w3-blue">
+        <span class="w3-bar-item" style="padding-left:1px"><b>Update Section</b></span>
+    </div>
+    <br>
+
+
+    <table id="update_entity_table" class="w3-table w3-bordered">
+        <tr>
+            <th>Property Name</th>
+            <th>Property Value</th>
+        </tr>
+        <tr>
+            <td>Id</td>
+            <td><label id="section_id" name="section_id_name" ></label></td>
+        </tr>
+        <tr>
+            <td>Title</td>
+            <td><input id="section_title" name="section_title_name" type="text"></td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td><input id="section_description" name="section_description_name" type="text"></td>
+        </tr>
+
+    </table>
+    <br>
+    <br>
+
+
+    <div class="container">
+        <button id="btnSave" class="btnSaveAuto">Save</button>
+        <button id="btnGoToRead" type="button">Cancel</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script type="text/javascript">
+
+        $.ajaxSetup({
+            cache: false,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        });
+
+        function SectionDTO(id,title,description){
+            this.id = id;
+            this.title = title;
+            this.description = description;
+        }
+
+        $(document).delegate('#btnSave','click',function(event){
+            event.preventDefault();
+
+            var sectionId = $('#sectionId').text();
+
+            var id = sectionId;
+            var title = $('#section_title').val();
+            var description = $('#section_description').val();
+
+            var sectionDTO = SectionDTO(id,title,description);
+
+            console.log(sectionDTO);
+            console.log(JSON.stringify(sectionDTO));
+
+            alert("sectionDTO.title="+sectionDTO.title);
+
+            alert("button Save!");
+
+            $.ajax({
+                type: "PUT",
+                url: '/section',
+                data: JSON.stringify(sectionDTO),
+                success: function(result){
+                    location.href="/ui/section/read/" + sectionId;
+                    window.setTimeout(function(){
+                        location.reload();
+                    }, 1000);
+
+                    alert('SUCCESS!');
+                },
+                error: function(err){
+                    alert('ERROR!');
+                }
+            });
+        });
+
+
+
+        $(document).delegate('#btnGoToRead','click',function(result){
+
+            var sectionId = $('#sectionId').text();
+
+            location.href="/ui/section/read/" + sectionId;
+            window.setTimeout(function(){
+                location.reload();
+            }, 1000);
+
+            alert('SUCCESS!');
+        });
+
+
+        function ajaxGet(){
+
+            var sectionId = $('#sectionId').text();
+
+            $.getJSON('/section/' + sectionId, function(json){
+
+                console.log(json);
+
+                $('#section_id').text(json.id);
+                $('#section_title').val(json.title);
+                $('#section_description').val(json.description);
+
+            });
+        }
+
+        $(document).ready(function() {
+
+            ajaxGet();
+        });
+
+    </script>
+
+</div>
+
+</body>
+</html>

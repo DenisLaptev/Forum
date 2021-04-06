@@ -35,7 +35,7 @@ public class User {
     private List<Message> messages;
 
     @OneToOne
-    @JoinColumn(name="avatar_id")
+    @JoinColumn(name = "avatar_id")
     private Avatar avatar;
 
     @ManyToMany

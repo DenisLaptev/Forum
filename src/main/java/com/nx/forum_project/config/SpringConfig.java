@@ -27,15 +27,20 @@ public class SpringConfig implements WebMvcConfigurer {
 
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
+
+        final String TEMPLATE_PREFIX = "/WEB-INF/views/";
+        final String TEMPLATE_SUFIX = ".html";
+
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/WEB-INF/views/");
-        templateResolver.setSuffix(".html");
+        templateResolver.setPrefix(TEMPLATE_PREFIX);
+        templateResolver.setSuffix(TEMPLATE_SUFIX);
         return templateResolver;
     }
 
     @Bean
     public SpringTemplateEngine templateEngine() {
+
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
         templateEngine.setEnableSpringELCompiler(true);
@@ -44,6 +49,7 @@ public class SpringConfig implements WebMvcConfigurer {
 
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
+
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
         registry.viewResolver(resolver);

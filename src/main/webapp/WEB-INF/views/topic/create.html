@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Create Topic</title>
+
+</head>
+
+<body>
+<div class="w3-container">
+
+    <div class="w3-container w3-bar w3-blue">
+        <span class="w3-bar-item" style="padding-left:1px"><b>Create Topic</b></span>
+    </div>
+    <br>
+
+    <table id="create_entity_table" class="w3-table w3-bordered">
+        <tr>
+            <th>Property Name</th>
+            <th>Property Value</th>
+        </tr>
+
+        <tr>
+            <td>Id</td>
+            <td><input id="id" name="topic_id_name" type="text"></td>
+        </tr>
+        <tr>
+            <td>Title</td>
+            <td><input id="topic_title" name="topic_title_name" type="text"></td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td><input id="topic_description" name="topic_description_name" type="text"></td>
+        </tr>
+    </table>
+    <br>
+    <br>
+
+    <div class="container">
+        <button id="btnSave" class="btnSaveEntity">Save</button>
+        <button onclick="location.href='/ui/topic/list'" type="button">Cancel</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script type="text/javascript">
+
+        $.ajaxSetup({
+            cache: false,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        });
+
+        function TopicDTO(id,title,description){
+            this.id = id;
+            this.title = title;
+            this.description = description;
+        }
+
+        $(document).delegate('#btnSave','click',function(event){
+            event.preventDefault();
+
+            var id = $('#id').val();
+            var title = $('#topic_title').val();
+            var description = $('#topic_description').val();
+
+            var topicDTO = new TopicDTO(id,title,description);
+
+            console.log(topicDTO);
+            console.log(JSON.stringify(topicDTO));
+
+            alert("topicDTO.title="+topicDTO.title);
+
+            alert("button Save!");
+
+            $.ajax({
+                type: "POST",
+                url: "/topic",
+                data: JSON.stringify(topicDTO),
+                success: function(result){
+                    location.href="/ui/topic/list";
+                    window.setTimeout(function(){
+                        location.reload();
+                    }, 1000);
+
+                    alert('SUCCESS!');
+                },
+                error: function(err){
+                    alert('ERROR!');
+                }
+            });
+        });
+
+    </script>
+</div>
+</body>
+</html>

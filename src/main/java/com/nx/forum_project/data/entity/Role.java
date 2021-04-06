@@ -15,13 +15,14 @@ import java.util.List;
 public class Role {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="id_generator")
-    @SequenceGenerator(name="id_generator", sequenceName = "seq_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_generator")
+    @SequenceGenerator(name = "id_generator", sequenceName = "seq_id")
     private Long id;
 
-    @Column(name="role")
+    @Column(name = "role")
     private String role;
 
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
+
 }

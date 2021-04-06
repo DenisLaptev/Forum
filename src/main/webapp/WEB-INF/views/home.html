@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Forum</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Home Page</title>
+
 </head>
+
 <body>
-    Welcome to Forum!
+<div class="w3-container">
+
+    <div class="w3-container w3-bar w3-blue">
+        <span class="w3-bar-item" style="padding-left:1px"><b>Welcome to Forum</b></span>
+    </div>
+
+    <br>
+    <br>
+    <div class="container">
+        <button onclick="location.href='/ui/user/list'" type="button">Users</button>
+    </div>
+    <br>
+    <br>
+    <div class="container">
+        <button onclick="location.href='/ui/role/list'" type="button">Roles</button>
+    </div>
+    <br>
+    <br>
+    <div class="container">
+        <button onclick="location.href='/ui/avatar/list'" type="button">Avatars</button>
+    </div>
+    <br>
+    <br>
+    <div class="container">
+        <button onclick="location.href='/ui/section/list'" type="button">Sections</button>
+    </div>
+    <br>
+    <br>
+    <div class="container">
+        <button onclick="location.href='/ui/topic/list'" type="button">Topics</button>
+    </div>
+    <br>
+    <br>
+    <div class="container">
+        <button onclick="location.href='/ui/message/list'" type="button">Messages</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+</div>
 </body>
 </html>

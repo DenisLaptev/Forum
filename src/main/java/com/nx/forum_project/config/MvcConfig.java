@@ -1,11 +1,14 @@
 package com.nx.forum_project.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
+
+    final String TEMPLATE_PREFIX = "/WEB-INF/views/";
 
     public void addViewControllers(ViewControllerRegistry registry) {
 
@@ -13,5 +16,17 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("home");
 
         registry.addViewController("/login").setViewName("login");
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler(
+                "/images/**",
+                "/css/**",
+                "/js/**")
+                .addResourceLocations(
+                        TEMPLATE_PREFIX+"images/",
+                        TEMPLATE_PREFIX+"css/",
+                        TEMPLATE_PREFIX+"js/");
     }
 }

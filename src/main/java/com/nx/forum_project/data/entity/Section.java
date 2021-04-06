@@ -15,14 +15,14 @@ import java.util.List;
 public class Section {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="id_generator")
-    @SequenceGenerator(name="id_generator", sequenceName = "seq_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_generator")
+    @SequenceGenerator(name = "id_generator", sequenceName = "seq_id")
     private Long id;
 
-    @Column(name="title")
+    @Column(name = "title")
     private String title;
 
-    @Column(name="description")
+    @Column(name = "description")
     private String description;
 
     @OneToMany(mappedBy = "section")

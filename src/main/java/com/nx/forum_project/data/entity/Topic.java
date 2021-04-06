@@ -15,18 +15,18 @@ import java.util.List;
 public class Topic {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="id_generator")
-    @SequenceGenerator(name="id_generator", sequenceName = "seq_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_generator")
+    @SequenceGenerator(name = "id_generator", sequenceName = "seq_id")
     private Long id;
 
-    @Column(name="title")
+    @Column(name = "title")
     private String title;
 
-    @Column(name="description")
+    @Column(name = "description")
     private String description;
 
     @ManyToOne
-    @JoinColumn(name="section_id")
+    @JoinColumn(name = "section_id")
     private Section section;
 
     @OneToMany(mappedBy = "topic")
