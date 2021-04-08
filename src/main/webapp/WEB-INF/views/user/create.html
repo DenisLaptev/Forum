@@ -6,7 +6,6 @@
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Create User</title>
-
 </head>
 
 <body>
@@ -14,6 +13,12 @@
 
     <div class="w3-container w3-bar w3-blue">
         <span class="w3-bar-item" style="padding-left:1px"><b>Create User</b></span>
+
+        <a href="/home" class="w3-bar-item w3-button" style="float: right;">
+            <img th:src="@{/images/icon_home.png}"
+                 alt="home"
+                 style="width:27px;height:27px;"
+                 title="home"></a>
     </div>
     <br>
 
@@ -36,6 +41,7 @@
             <td><input id="user_last_name" name="user_first_name_name" type="text"></td>
         </tr>
     </table>
+
     <br>
     <br>
 
@@ -74,10 +80,6 @@
             console.log(userDTO);
             console.log(JSON.stringify(userDTO));
 
-            alert("userDTO.firstName="+userDTO.firstName);
-
-            alert("button Save!");
-
             $.ajax({
                 type: "POST",
                 url: "/user",
@@ -87,11 +89,9 @@
                     window.setTimeout(function(){
                         location.reload();
                     }, 1000);
-
-                    alert('SUCCESS!');
                 },
                 error: function(err){
-                    alert('ERROR!');
+                    alert('POST REQUEST ERROR!');
                 }
             });
         });

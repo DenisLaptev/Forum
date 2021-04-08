@@ -6,7 +6,6 @@
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Update User</title>
-
 </head>
 
 <body>
@@ -16,6 +15,12 @@
 
     <div class="w3-container w3-bar w3-blue">
         <span class="w3-bar-item" style="padding-left:1px"><b>Update User</b></span>
+
+        <a href="/home" class="w3-bar-item w3-button" style="float: right;">
+            <img th:src="@{/images/icon_home.png}"
+                 alt="home"
+                 style="width:27px;height:27px;"
+                 title="home"></a>
     </div>
     <br>
 
@@ -27,7 +32,7 @@
         </tr>
         <tr>
             <td>Id</td>
-            <td><input id="id" name="user_id_name" type="text"></td>
+            <td><label id="user_id" name="user_id_name" ></label></td>
         </tr>
         <tr>
             <td>First Name</td>
@@ -35,10 +40,10 @@
         </tr>
         <tr>
             <td>Last Name</td>
-            <td><input id="user_last_name" name="user_first_name_name" type="text"></td>
+            <td><input id="user_last_name" name="user_last_name_name" type="text"></td>
         </tr>
-
     </table>
+
     <br>
     <br>
 
@@ -75,14 +80,14 @@
             var firstName = $('#user_first_name').val();
             var lastName = $('#user_last_name').val();
 
-            var userDTO = UserDTO(id,firstName,lastName);
+            var userDTO = new UserDTO(id,firstName,lastName);
 
+            console.log(userId);
+            console.log(id);
+            console.log(firstName);
+            console.log(lastName);
             console.log(userDTO);
             console.log(JSON.stringify(userDTO));
-
-            alert("userDTO.firstName="+userDTO.firstName);
-
-            alert("button Save!");
 
             $.ajax({
                 type: "PUT",
@@ -93,15 +98,12 @@
                     window.setTimeout(function(){
                         location.reload();
                     }, 1000);
-
-                    alert('SUCCESS!');
                 },
                 error: function(err){
-                    alert('ERROR!');
+                    alert('PUT REQUEST ERROR!');
                 }
             });
         });
-
 
 
         $(document).delegate('#btnGoToRead','click',function(result){
@@ -112,8 +114,6 @@
             window.setTimeout(function(){
                 location.reload();
             }, 1000);
-
-            alert('SUCCESS!');
         });
 
 
@@ -133,7 +133,6 @@
         }
 
         $(document).ready(function() {
-
             ajaxGet();
         });
 

@@ -6,7 +6,6 @@
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Update Topic</title>
-
 </head>
 
 <body>
@@ -16,9 +15,14 @@
 
     <div class="w3-container w3-bar w3-blue">
         <span class="w3-bar-item" style="padding-left:1px"><b>Update Topic</b></span>
+
+        <a href="/home" class="w3-bar-item w3-button" style="float: right;">
+            <img th:src="@{/images/icon_home.png}"
+                 alt="home"
+                 style="width:27px;height:27px;"
+                 title="home"></a>
     </div>
     <br>
-
 
     <table id="update_entity_table" class="w3-table w3-bordered">
         <tr>
@@ -37,8 +41,8 @@
             <td>Description</td>
             <td><input id="topic_description" name="topic_description_name" type="text"></td>
         </tr>
-
     </table>
+
     <br>
     <br>
 
@@ -75,14 +79,10 @@
             var title = $('#topic_title').val();
             var description = $('#topic_description').val();
 
-            var topicDTO = TopicDTO(id,title,description);
+            var topicDTO = new TopicDTO(id,title,description);
 
             console.log(topicDTO);
             console.log(JSON.stringify(topicDTO));
-
-            alert("topicDTO.title="+topicDTO.title);
-
-            alert("button Save!");
 
             $.ajax({
                 type: "PUT",
@@ -93,15 +93,12 @@
                     window.setTimeout(function(){
                         location.reload();
                     }, 1000);
-
-                    alert('SUCCESS!');
                 },
                 error: function(err){
-                    alert('ERROR!');
+                    alert('PUT REQUEST ERROR!');
                 }
             });
         });
-
 
 
         $(document).delegate('#btnGoToRead','click',function(result){
@@ -112,8 +109,6 @@
             window.setTimeout(function(){
                 location.reload();
             }, 1000);
-
-            alert('SUCCESS!');
         });
 
 
@@ -133,7 +128,6 @@
         }
 
         $(document).ready(function() {
-
             ajaxGet();
         });
 

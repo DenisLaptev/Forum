@@ -6,7 +6,6 @@
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Update Message</title>
-
 </head>
 
 <body>
@@ -16,6 +15,12 @@
 
     <div class="w3-container w3-bar w3-blue">
         <span class="w3-bar-item" style="padding-left:1px"><b>Update Message</b></span>
+
+        <a href="/home" class="w3-bar-item w3-button" style="float: right;">
+            <img th:src="@{/images/icon_home.png}"
+                 alt="home"
+                 style="width:27px;height:27px;"
+                 title="home"></a>
     </div>
     <br>
 
@@ -37,11 +42,10 @@
             <td>User Id</td>
             <td><input id="user_id" name="user_id_name" type="text"></td>
         </tr>
-
     </table>
-    <br>
-    <br>
 
+    <br>
+    <br>
 
     <div class="container">
         <button id="btnSave" class="btnSaveAuto">Save</button>

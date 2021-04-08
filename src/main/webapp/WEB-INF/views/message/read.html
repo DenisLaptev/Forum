@@ -28,6 +28,13 @@
                  title="delete"
                  id="btnDeleteEntity">
         </span>
+
+        <a href="/home" class="w3-bar-item w3-button" style="float: right;">
+            <img th:src="@{/images/icon_home.png}"
+                 alt="home"
+                 style="width:27px;height:27px;"
+                 title="home"></a>
+
     </div>
     <br>
 
@@ -35,7 +42,6 @@
         <tr>
             <th>Property Name</th>
             <th>Property Value</th>
-
         </tr>
     </table>
 
@@ -65,10 +71,6 @@
 
             console.log(id);
 
-            alert("id="+id);
-
-            alert("button Delete!");
-
             $.ajax({
                 type: "DELETE",
                 url: '/message/' + id,
@@ -77,11 +79,9 @@
                     window.setTimeout(function(){
                         location.reload();
                     }, 1000);
-
-                    alert('SUCCESS!');
                 },
                 error: function(err){
-                    alert('ERROR!');
+                    alert('DELETE REQUEST ERROR!');
                 }
             });
         });
@@ -114,7 +114,6 @@
                 }else{
                     tr.push('<td>'+null+'</td>');
                 }
-                tr.push('<td>' + json.text+'</td>');
                 tr.push('</tr>');
 
                 $('#entity_table').append($(tr.join('')))
@@ -122,7 +121,6 @@
         }
 
         $(document).ready(function() {
-
             ajaxGet();
         });
 
