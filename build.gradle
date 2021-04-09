@@ -23,27 +23,22 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
-    // https://mvnrepository.com/artifact/org.webjars/bootstrap
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.security:spring-security-test'
+
     compile group: 'org.webjars', name: 'bootstrap', version: '4.4.1-1'
-    // https://mvnrepository.com/artifact/org.webjars.bower/jquery
     compile group: 'org.webjars.bower', name: 'jquery', version: '3.5.0'
-    // https://mvnrepository.com/artifact/javax.servlet/jstl
     compile group: 'javax.servlet', name: 'jstl', version: '1.2'
-    // https://mvnrepository.com/artifact/javax.el/el-api
     compile group: 'javax.el', name: 'el-api', version: '2.2.1-b04'
 
     compile('org.hibernate:hibernate-core:5.4.2.Final')
-
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.19'
-
     runtimeOnly 'com.h2database:h2:1.4.200'
 
 //    testCompile group: 'com.h2database', name: 'h2', version: '1.4.200'
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
-
     testImplementation 'org.hamcrest:hamcrest:2.2'
-
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }

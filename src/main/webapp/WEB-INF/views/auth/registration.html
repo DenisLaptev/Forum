@@ -5,14 +5,14 @@
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <title>Create User</title>
+    <title>Register User</title>
 </head>
 
 <body>
 <div class="w3-container">
 
     <div class="w3-container w3-bar w3-blue">
-        <span class="w3-bar-item" style="padding-left:1px"><b>Create User</b></span>
+        <span class="w3-bar-item" style="padding-left:1px"><b>Register User</b></span>
 
         <a href="/home" class="w3-bar-item w3-button" style="float: right;">
             <img th:src="@{/images/icon_home.png}"
@@ -47,6 +47,10 @@
         <tr>
             <td>Password</td>
             <td><input id="user_password" name="user_password_name" type="text"></td>
+        </tr>
+        <tr>
+            <td>Avatar Id</td>
+            <td><input id="user_avatar_id" name="user_avatar_id_name" type="text"></td>
         </tr>
     </table>
 
@@ -86,6 +90,8 @@
             var lastName = $('#user_last_name').val();
             var login = $('#user_login').val();
             var password = $('#user_password').val();
+            //var avatarId = $('#user_avatar_id').val();
+            //var avatarId = null;
 
             var userDTO = new UserDTO(id,firstName,lastName,login,password);
 

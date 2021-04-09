@@ -3,15 +3,27 @@ package com.nx.forum_project.web.service.impl.dao.hibernate;
 import com.nx.forum_project.data.dao.interf.CRUDDAO;
 import com.nx.forum_project.data.entity.User;
 import com.nx.forum_project.web.service.interf.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @Qualifier("UserServiceHibernateImpl")
 public class UserServiceHibernateImpl extends CRUDDAOHibernateService<User, Long> implements UserService {
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public CRUDDAO<User, Long> getCRUDDAO() {
         return getDAOFactory().getUserDAO();
+    }
+
+    //overrode method to encode the password of user at first and then save to DB
+    @Override
+    public void create(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        getCRUDDAO().create(user);
     }
 }

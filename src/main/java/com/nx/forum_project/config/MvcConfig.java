@@ -15,7 +15,6 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/home").setViewName("home");
         registry.addViewController("/").setViewName("home");
 
-        registry.addViewController("/login").setViewName("login");
     }
 
     @Override
@@ -25,8 +24,8 @@ public class MvcConfig implements WebMvcConfigurer {
                 "/css/**",
                 "/js/**")
                 .addResourceLocations(
-                        TEMPLATE_PREFIX+"images/",
-                        TEMPLATE_PREFIX+"css/",
-                        TEMPLATE_PREFIX+"js/");
+                        TEMPLATE_PREFIX + "images/",
+                        TEMPLATE_PREFIX + "css/",
+                        TEMPLATE_PREFIX + "js/");
     }
 }
