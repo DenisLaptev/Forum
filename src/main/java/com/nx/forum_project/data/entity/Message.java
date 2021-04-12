@@ -14,8 +14,8 @@ import javax.persistence.*;
 public class Message {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_generator")
-    @SequenceGenerator(name = "id_generator", sequenceName = "seq_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "message_id_generator")
+    @SequenceGenerator(name = "message_id_generator", schema = "ism", sequenceName = "seq_message_id", allocationSize = 1)
     private Long id;
 
     @Column(name = "text")

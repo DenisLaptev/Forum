@@ -6,6 +6,7 @@
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Home Page</title>
+    <script type="text/javascript" src="/js/jquery-3.6.0.js"></script>
 </head>
 
 <body>
@@ -21,6 +22,18 @@
                  title="Logout"
                  id="btnLogout">
         </span>
+
+        <a href="/login" class="w3-bar-item w3-button" style="float: right;">
+            <img th:src="@{/images/icon_login.png}"
+                 alt="login"
+                 style="width:27px;height:27px;"
+                 title="login"></a>
+
+        <a href="/registration-form" class="w3-bar-item w3-button" style="float: right;">
+            <img th:src="@{/images/icon_registration.png}"
+                 alt="registration"
+                 style="width:27px;height:27px;"
+                 title="registration"></a>
     </div>
 
     <br>
@@ -54,7 +67,7 @@
         <button onclick="location.href='/ui/message/list'" type="button">Messages</button>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!--    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
 
 
     <script type="text/javascript">
@@ -66,6 +79,7 @@
                 'Content-Type': 'application/json',
             }
         });
+
 
         $(document).delegate('#btnLogout','click',function(event){
             event.preventDefault();

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User form</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css"
+          rel="stylesheet">
+    <script type="text/javascript" src="/js/jquery-3.6.0.js"></script>
+</head>
+<body>
+
+
+<section class="ui container">
+    <div class="ui form" th:object="${user}">
+
+        <div class="field">
+            <label>First Name:</label>
+            <input id="user_first_name" name="user_first_name_name" type="text" th:field="*{firstName}">
+            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</span>
+        </div>
+
+        <div class="field">
+            <label>Last Name:</label>
+            <input id="user_last_name" name="user_last_name_name" type="text" th:field="*{lastName}">
+            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</span>
+        </div>
+
+        <div class="field">
+            <label>Login:</label>
+            <input id="user_login" name="user_login_name" type="text" th:field="*{login}">
+            <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Login Error</span>
+        </div>
+
+        <div class="field">
+            <label>Password:</label>
+            <input id="user_password" name="user_password_name" type="password" th:field="*{password}">
+            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
+        </div>
+
+        <!--<div class="field">
+            <label>Avatar Id:</label>
+            <input id="user_avatar_id" name="user_avatar_id_name" type="text" th:field="*{avatarId}">
+            <span th:if="${#fields.hasErrors('avatarId')}" th:errors="*{avatarId}">Avatar Id Error</span>
+        </div>
+
+        <div class="field">
+            <label>Roles:</label>
+            <input id="user_roles" name="user_roles_name" type="text" th:field="*{roles}">
+            <span th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}">Roles Error</span>
+        </div>-->
+
+        <button id="btnSave" class="ui button">Submit</button>
+        <button onclick="location.href='/'" type="button" class="ui button">Cancel</button>
+
+    </div>
+</section>
+
+
+<script type="text/javascript">
+
+        $.ajaxSetup({
+            cache: false,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        });
+
+        //function UserDTO(id,firstName,lastName,login,password,avatarId,roles){
+        function UserDTO(id,firstName,lastName,login,password){
+            this.id = id;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.login = login;
+            this.password = password;
+            //this.avatarId = avatarId;
+            //this.roles = roles;
+        }
+
+        $(document).delegate('#btnSave','click',function(event){
+            event.preventDefault();
+
+            //var id = $('#id').val();
+            var id = 1;
+            var firstName = $('#user_first_name').val();
+            var lastName = $('#user_last_name').val();
+            var login = $('#user_login').val();
+            //var login = "myLogin";
+            var password = $('#user_password').val();
+            //var password = "1";
+            //var avatarId = $('#user_avatar_id').val();
+            //var roles = $('#user_roles').val();
+
+            var userDTO = new UserDTO(id,firstName,lastName,login,password);
+
+            console.log(userDTO);
+            console.log(JSON.stringify(userDTO));
+
+
+
+            $.ajax({
+                type: "POST",
+                url: "/registration-validate",
+                data: JSON.stringify(userDTO),
+                success: function(result){
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/registration-do",
+                        data: JSON.stringify(userDTO),
+                        success: function(result){
+                            location.href="/registration-info";
+                            window.setTimeout(function(){
+                                location.reload();
+                            }, 1000);
+                        },
+                        error: function(err){
+                            alert('REGISTRATION DO POST REQUEST ERROR!');
+                        }
+                    });
+
+                },
+                error: function(err){
+                    alert('REGISTRATION VALIDATION POST REQUEST ERROR!');
+                    location.href="/registration-form";
+                    window.setTimeout(function(){
+                        location.reload();
+                    }, 1000);
+                }
+            });
+
+        });
+
+</script>
+</body>
+</html>

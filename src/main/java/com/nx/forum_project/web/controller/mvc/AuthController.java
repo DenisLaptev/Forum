@@ -1,9 +1,6 @@
 package com.nx.forum_project.web.controller.mvc;
 
 import com.nx.forum_project.data.entity.User;
-import com.nx.forum_project.web.service.interf.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,17 +11,25 @@ public class AuthController {
 
     /*
         Sign up = register your details for the first time
-
         Sign in = log in, notify someone of your arrival
      */
 
+    // We validate the User bean with @Valid.
+    // The validation results are stored in BindingResult
 
-    @GetMapping("/registration")
-    public String showRegistration(Model model) {
+
+    @GetMapping("/registration-form")
+    public String showRegistrationForm(Model model) {
 
         model.addAttribute("user", new User());
 
-        return "auth/registration";
+        return "auth/registrationForm";
+    }
+
+    @GetMapping("/registration-info")
+    public String showRegistrationInfo() {
+
+        return "auth/registrationInfo";
     }
 
     @GetMapping("/login")
@@ -36,11 +41,4 @@ public class AuthController {
         return "auth/login";
     }
 
-//    @GetMapping("/logout")
-//    public String showLogout(Model model) {
-//
-//        model.addAttribute("user", new User());
-//
-//        return "auth/logout";
-//    }
 }

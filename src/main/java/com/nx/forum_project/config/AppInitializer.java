@@ -14,6 +14,7 @@ public class AppInitializer
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class[0];
+        //return new Class[]{SpringConfig.class};
     }
 
     @Override
