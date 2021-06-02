@@ -64,6 +64,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .deleteCookies("JSESSIONID");
+
+        http.headers().frameOptions().disable();//fix to use h2-console
         ;
 
         /*http.csrf().disable()
