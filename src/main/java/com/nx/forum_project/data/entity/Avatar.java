@@ -14,8 +14,9 @@ import javax.persistence.*;
 public class Avatar {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "avatar_id_generator")
-    @SequenceGenerator(name = "avatar_id_generator", schema = "ism", sequenceName = "seq_avatar_id", allocationSize = 1)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "avatar_id_generator")
+//    @SequenceGenerator(name = "avatar_id_generator", schema = "ism", sequenceName = "seq_avatar_id", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "url")
